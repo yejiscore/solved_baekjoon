@@ -1,24 +1,24 @@
 import sys
-import math
-
 input = sys.stdin.readline
 
-# 에라토스테네스의 체 알고리즘
-array = [True for i in range(1000001)]
+primeNum = []
+check = [0]*1000001
+check[0] = 1
+check[1] = 1
 
-for i in range(2, int(math.sqrt(1000000))+1):
-    if array[i] == True:
-        j = 2
-        while i*j <= 1000000:
-            array[i*j] = False
-            j += 1
+for i in range(2, 1000001):
+    if check[i] == 0:
+        primeNum.append(i)
+        for j in range(2*i, 1000001, i):
+            check[j] = 1
 
 t = int(input())
-lst = [int(input()) for _ in range(t)]
-for i in range(t):
+for _ in range(t):
     cnt = 0
-    num = lst[i]
-    for j in range(2, (num//2)+1):
-        if array[j] and array[num-j]:
+    n = int(input())
+    for i in primeNum:
+        if i >= n:
+            break
+        if check[n-i] == 0 and i <= n-i:
             cnt += 1
     print(cnt)
