@@ -1,2 +1,1 @@
-n = int(input())
-print(int(n**.5))
+print(int(int(input())**(1/2)))
